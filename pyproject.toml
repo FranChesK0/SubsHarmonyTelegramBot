@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "subsharmonytelegrambot"
+version = "0.1.0"
+description = "Telegram bot to help manage group subscriptions"
+authors = ["FranChesKo"]
+license = "Apache-2.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
