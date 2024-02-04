@@ -8,7 +8,7 @@ from database.database import Base
 
 
 class UserORM(Base):
-    __tablename__ = "user"
+    __tablename__ = "users"
     _repr_columns_number = 2
 
     id: Mapped[str] = mapped_column(primary_key=True)
@@ -18,7 +18,7 @@ class UserORM(Base):
 
 
 class SubscriptionORM(Base):
-    __tablename__ = "subscription"
+    __tablename__ = "subscriptions"
     __table_args__ = (
         CheckConstraint("total_cost > 0", name="subscription_total_cost_check"),
     )
@@ -40,8 +40,8 @@ class UserSubscriptionORM(Base):
     )
     _repr_columns_number = 5
 
-    user_id: Mapped[str] = mapped_column(ForeignKey("user.id", ondelete="CASCADE"), primary_key=True)
-    subscription_id: Mapped[int] = mapped_column(ForeignKey("subscription.id", ondelete="CASCADE"),
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    subscription_id: Mapped[int] = mapped_column(ForeignKey("subscriptions.id", ondelete="CASCADE"),
                                                  primary_key=True)
     cost: Mapped[decimal.Decimal]
     send: Mapped[bool]
