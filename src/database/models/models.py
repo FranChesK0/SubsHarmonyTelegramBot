@@ -44,8 +44,8 @@ class UserSubscriptionORM(Base):
     subscription_id: Mapped[int] = mapped_column(ForeignKey("subscription.id", ondelete="CASCADE"),
                                                  primary_key=True)
     cost: Mapped[decimal.Decimal]
-    debt: Mapped[decimal.Decimal] = mapped_column(server_default=text("0"))
     send: Mapped[bool]
+    debt: Mapped[decimal.Decimal] = mapped_column(server_default=text("0"))
 
     user: Mapped["UserORM"] = relationship(back_populates="subscriptions")
     subscription: Mapped["SubscriptionORM"] = relationship(back_populates="users")
