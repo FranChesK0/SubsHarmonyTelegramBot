@@ -1,5 +1,6 @@
 from sqlalchemy import Delete, Insert, Select, Sequence, Update
 
+from database.schemas import DTO
 from core import get_logger, Logger
 from database.database import Base, engine, session_factory
 
@@ -25,6 +26,10 @@ async def _select(query: Select) -> list[any] | Sequence[any]:
     logger.debug(__compile_query(query))
     async with session_factory() as session:
         return (await session.execute(query)).unique().scalars().all()
+
+
+def _to_dto(values: list[any] | Sequence[any], dto: type[DTO]) -> list[DTO]:
+    return [dto.model_validate(row, from_attributes=True) for row in values]
 
 
 def __compile_query(query: Insert | Update | Delete | Select) -> str:
