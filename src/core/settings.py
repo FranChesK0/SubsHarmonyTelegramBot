@@ -21,6 +21,11 @@ class DBSettings(BaseSettings):
     user: str = "xxx"
     password: str = "xxx"
 
+    @property
+    def url(self) -> str:
+        return (f"postgresql+asyncpg://{settings.db.user}:{settings.db.password}@{settings.db.host}:{settings.db.port}/"
+                f"{settings.db.name}")
+
 
 class Settings(BaseSettings):
     debug: bool = "-d" in sys.argv or "--debug" in sys.argv
